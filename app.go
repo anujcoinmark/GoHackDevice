@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"os"
 	"time"
 )
 
@@ -35,7 +36,11 @@ func RouteHandler(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	ShellScript()
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
 	http.HandleFunc("/", RouteHandler)
-	error := http.ListenAndServe(":8000", nil)
+	error := http.ListenAndServe(":"+port, nil)
 	fmt.Println(error)
 }
