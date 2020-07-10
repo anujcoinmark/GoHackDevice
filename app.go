@@ -35,7 +35,12 @@ func RouteHandler(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	//ShellScript()
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "9999"
+	}
+
 	http.HandleFunc("/", RouteHandler)
-	error := http.ListenAndServe(":9999", nil)
+	error := http.ListenAndServe(":"+port, nil)
 	fmt.Println(error)
 }
