@@ -2,10 +2,10 @@ package main
 
 import (
 	//"fmt"
-	"fmt"
-	"log"
+	//"fmt"
+	//"log"
 	"net/http"
-	"os/exec"
+	//"os/exec"
 	"runtime"
 	"strings"
 )
@@ -51,6 +51,7 @@ func GOOSS() string {
 	return os
 }
 
+/*
 func ShellScript() {
 	out, err := exec.Command("/bin/sh", "sample.sh").Output()
 	if err != nil {
@@ -58,3 +59,4 @@ func ShellScript() {
 	}
 	fmt.Println(out)
 }
+*/

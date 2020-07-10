@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"net/http"
-	"os"
 	"time"
 )
 
@@ -13,13 +12,13 @@ func RouteHandler(w http.ResponseWriter, r *http.Request) {
 	deviceType := GetType(r)
 	operSys := GOOSS()
 	if operSys == "linux" {
-		fmt.Fprintf(w, "<h1>Operating Sysyem: %s<h1>", operSys)
+		fmt.Fprintf(w, "<h1>Operating System: %s<h1>", operSys)
 	}
 	if operSys == "windows" {
-		fmt.Fprintf(w, "<h1>Operating Sysyem: %s<h1>", operSys)
+		fmt.Fprintf(w, "<h1>Operating System: %s<h1>", operSys)
 	}
 	if operSys == "darwin" {
-		fmt.Fprintf(w, "<h1>Operating Sysyem: %s<h1>", operSys)
+		fmt.Fprintf(w, "<h1>Operating System: %s<h1>", operSys)
 	}
 
 	if deviceType == "Mobile" {
@@ -35,12 +34,8 @@ func RouteHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	ShellScript()
-	port := os.Getenv("PORT")
-	if port == "" {
-		port = "8080"
-	}
+	//ShellScript()
 	http.HandleFunc("/", RouteHandler)
-	error := http.ListenAndServe(":"+port, nil)
+	error := http.ListenAndServe(":9999", nil)
 	fmt.Println(error)
 }
