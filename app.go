@@ -12,6 +12,9 @@ func RouteHandler(w http.ResponseWriter, r *http.Request) {
 
 	deviceType := GetType(r)
 	operSys := GOOSS()
+	sysmemory, sysbyte := SystemMemory()
+	cpu, foo := SystemCpu()
+
 	if operSys == "linux" {
 		fmt.Fprintf(w, "<h1>Operating System: %s<h1>", operSys)
 	}
@@ -30,12 +33,15 @@ func RouteHandler(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "<h1>Device : Tablet</h1>")
 	}
 
+	fmt.Fprintf(w, "<h1>System Memory: %s<h1>", sysmemory)
+	fmt.Fprintf(w, "<h1>Memory Byte Uses: %d<h1>", sysbyte)
+	fmt.Fprintf(w, "<h2>CPU Info: %v<h2>", cpu)
+	fmt.Fprintf(w, "<h2>Processor Threads: %v<h2>", foo)
 	elapsed := time.Since(start)
 	fmt.Printf("Time take to serve static file %s\n\n", elapsed)
 }
 
 func main() {
-	//ShellScript()
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "9999"
