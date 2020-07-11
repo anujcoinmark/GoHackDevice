@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/jaypipes/ghw"
+	//	"log"
 	"net/http"
 	//"reflect"
 	"runtime"
@@ -76,4 +77,21 @@ func SystemCpu() (*ghw.CPUInfo, []*ghw.ProcessorCore) {
 		}
 	}
 	return cpu, foo
+}
+
+func BlockStorage() (*ghw.BlockInfo, []*ghw.Disk, []*ghw.Partition) {
+	var partion []*ghw.Partition
+	var Disk []*ghw.Disk
+	block, err := ghw.Block()
+	if err != nil {
+		fmt.Printf("Error getting block storage info: %v", err)
+	}
+	for _, disk := range block.Disks {
+		Disk = append(Disk, disk)
+		//log.Println(Disk)
+		for _, part := range disk.Partitions {
+			partion = append(partion, part)
+		}
+	}
+	return block, Disk, partion
 }
